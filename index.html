@@ -49,8 +49,15 @@
         </header>
 
         <section class="research-intro">
-            <h2>Research</h2>
-            <p>I work on 3D reconstruction from noisy and incomplete sensor data. Using a mix of optimization-based and learning-based methods.</p>
+            <div class="research-intro-content">
+                <div class="research-text">
+                    <h2>Research</h2>
+                    <p>My research focuses on 3D reconstruction from noisy and incomplete sensor data. Using a mix of optimization-based and learning-based methods. Below is a list of selected publications, for the full list see my <a href="https://scholar.google.com/citations?user=HWAAVg8AAAAJ&hl=sv" target="_blank" rel="noopener noreferrer">Google Scholar</a>.</p>
+                </div>
+                <figure class="triangulation-diagram">
+                    <div id="triangulation-canvas" class="triangulation-canvas"></div>
+                </figure>
+            </div>
         </section>
 
         <section class="publications">
@@ -117,6 +124,7 @@
             </article>
         </section>
     </main>
+    <script type="module" src="triangulation-scene.js"></script>
 </body>
 
 </html>
