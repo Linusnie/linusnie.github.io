@@ -76,9 +76,26 @@ function init() {
   const container = document.getElementById('triangulation-canvas');
   if (!container) return;
 
-  const width = container.clientWidth;
-  const height = container.clientHeight;
+  let width = container.clientWidth;
+  let height = container.clientHeight;
 
+  if (width === 0 || height === 0) {
+    const observer = new ResizeObserver(() => {
+      const w = container.clientWidth;
+      const h = container.clientHeight;
+      if (w > 0 && h > 0) {
+        observer.disconnect();
+        createScene(container, w, h);
+      }
+    });
+    observer.observe(container);
+    return;
+  }
+
+  createScene(container, width, height);
+}
+
+function createScene(container, width, height) {
   const scene = new THREE.Scene();
   scene.background = new THREE.Color(BG_COLOR);
 
@@ -149,6 +166,7 @@ function init() {
   function onResize() {
     const w = container.clientWidth;
     const h = container.clientHeight;
+    if (w <= 0 || h <= 0) return;
     camera.aspect = w / h;
     camera.updateProjectionMatrix();
     renderer.setSize(w, h);
@@ -162,6 +180,8 @@ function init() {
   }
 
   window.addEventListener('resize', onResize);
+  const resizeObserver = new ResizeObserver(() => onResize());
+  resizeObserver.observe(container);
 
   let autoRotate = true;
   let lastInteraction = 0;
